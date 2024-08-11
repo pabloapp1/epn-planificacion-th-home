@@ -1,0 +1,234 @@
+<div class="grid">
+    <div class="col-12">
+        <div class="card">
+<!--            <span class="block text-900 font-bold text-xl mb-4">Listado de Actividades</span>-->
+            <div class="grid grid-nogutter flex-wrap p-fluid mt-2">
+                <div class="col-12 lg:col-12">
+                    <div class="grid formgrid">
+                        <div class="field col-12 md:col-3">
+                            <label htmlFor="state">Institución</label>
+                            <p-dropdown optionLabel="name" ></p-dropdown>
+                        </div>
+
+                        <div class="col-12 lg:col-3 field">
+                            <label htmlFor="state">Macroproceso</label>
+                            <p-dropdown optionLabel="name" ></p-dropdown>
+
+                        </div>
+                        <div class="col-12 lg:col-3 field">
+                            <label htmlFor="state">Proceso</label>
+                            <p-dropdown optionLabel="name" ></p-dropdown>
+                        </div>
+
+                        <div class="col-12 lg:col-3 field">
+                            <label htmlFor="state">Subproceso</label>
+                            <p-dropdown optionLabel="name" ></p-dropdown>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12">
+        <div class="card">
+<!--            <span class="block text-900 font-bold text-xl mb-4">Listado de actividades por volumen</span>-->
+            <p-toolbar styleClass="mb-4">
+                <div class="p-toolbar-group-left flex flex-wrap">
+                    <button pButton type="button" label="Nuevo" icon="pi pi-plus" class="mr-2"></button>
+                </div>
+
+                <div class="p-toolbar-group-right">
+                    <span class="p-float-label">
+                        <p-dropdown inputId="dropdown" optionLabel="name" [showClear]="true"
+                                    placeholder="Select a City" />
+                        <label for="dropdown">Volumen</label>
+                    </span>
+                </div>
+
+            </p-toolbar>
+
+            <p-table #dt [value]="listProductsActivity" dataKey="idActividad" editMode="row"
+                     responsiveLayout="scroll" [rows]="10" styleClass="p-datatable-striped"
+                     [globalFilterFields]="['nombreActividad']"
+                     [paginator]="true" [rowsPerPageOptions]="[10,20,30]" [showCurrentPageReport]="true"
+                     currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} registros"
+                     selectionMode="multiple" [rowHover]="true" >
+                <ng-template pTemplate="caption">
+                    <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
+                        <h5 class="m-0">Lista de actividades por volumen</h5>
+                        <span class="block mt-2 md:mt-0 p-input-icon-left">
+                            <i class="pi pi-search"></i>
+                            <input pInputText type="text" (input)="onGlobalFilter(dt, $event)" placeholder="Buscar..."
+                                   class="w-full sm:w-auto"/>
+                        </span>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th pSortableColumn="nombreActividad">Nombre&nbsp;<p-sortIcon field="nombreActividad"></p-sortIcon></th>
+                        <th pSortableColumn="conocimientoActividad">Conocimiento&nbsp;<p-sortIcon field="conocimientoActividad"></p-sortIcon></th>
+                        <th pSortableColumn="relacionamientoActividad">Relacionamiento&nbsp;<p-sortIcon field="relacionamientoActividad"></p-sortIcon></th>
+                        <th pSortableColumn="condiciontrabajoActividad">Condicion&nbsp;de&nbsp;trabajo&nbsp;<p-sortIcon field="condiciontrabajoActividad"></p-sortIcon></th>
+                        <th pSortableColumn="impactoActividad">Impacto&nbsp;<p-sortIcon field="impactoActividad"></p-sortIcon></th>
+                        <th pSortableColumn="responsabilidadActividad">Responsabilidad&nbsp;<p-sortIcon field="responsabilidadActividad"></p-sortIcon></th>
+
+                        <th pSortableColumn="ponderacionActividad">Ponderacion&nbsp;<p-sortIcon field="ponderacionActividad"></p-sortIcon></th>
+                        <th pSortableColumn="ponderacionnivelActividad">Ponderacion&nbsp;nivel&nbsp;<p-sortIcon field="ponderacionnivelActividad"></p-sortIcon></th>
+                        <th pSortableColumn="ponderaciongoActividad">PonderacionGO&nbsp;<p-sortIcon field="ponderaciongoActividad"></p-sortIcon></th>
+
+                        <th pSortableColumn="observacionActividad">Observacion&nbsp;<p-sortIcon field="observacionActividad"></p-sortIcon></th>
+                        <th pSortableColumn="fecharegistroActividad">Fecha&nbsp;de&nbsp;registro&nbsp;<p-sortIcon field="fecharegistroActividad"></p-sortIcon></th>
+                        <th></th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-productActivity let-editing="editing" let-ri="rowIndex">
+                    <tr [pEditableRow]="productActivity">
+                        <td style="width:6%; min-width:6rem;">
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <input pInputText type="text" [(ngModel)]="productActivity.nombreActividad" />
+                                </ng-template>
+                                <ng-template pTemplate="output">
+                                    {{productActivity.nombreActividad}}
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+                        <td>
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <input pInputText type="text"
+                                           [(ngModel)]="productActivity.conocimientoActividad" />
+                                </ng-template>
+                                <ng-template pTemplate="output">
+                                    {{productActivity.conocimientoActividad}}
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+                        <td>
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <input pInputText type="text"
+                                           [(ngModel)]="productActivity.relacionamientoActividad" />
+                                </ng-template>
+                                <ng-template pTemplate="output">
+                                    {{productActivity.relacionamientoActividad}}
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+
+                        <td>
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <input pInputText type="text"
+                                           [(ngModel)]="productActivity.condiciontrabajoActividad" />
+                                </ng-template>
+                                <ng-template pTemplate="output">
+                                    {{productActivity.condiciontrabajoActividad}}
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+
+                        <td>
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <input pInputText type="text"
+                                           [(ngModel)]="productActivity.impactoActividad" />
+                                </ng-template>
+                                <ng-template pTemplate="output">
+                                    {{productActivity.impactoActividad}}
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+
+                        <td>
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <input pInputText type="text"
+                                           [(ngModel)]="productActivity.responsabilidadActividad" />
+                                </ng-template>
+                                <ng-template pTemplate="output">
+                                    {{productActivity.responsabilidadActividad}}
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+
+                        <td>
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <input pInputText type="text"
+                                           [(ngModel)]="productActivity.ponderacionActividad" />
+                                </ng-template>
+                                <ng-template pTemplate="output">
+                                    {{productActivity.ponderacionActividad}}
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+
+                        <td>
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <input pInputText type="text"
+                                           [(ngModel)]="productActivity.ponderacionnivelActividad" />
+                                </ng-template>
+                                <ng-template pTemplate="output">
+                                    {{productActivity.ponderacionnivelActividad}}
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+
+                        <td>
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <input pInputText type="text"
+                                           [(ngModel)]="productActivity.ponderaciongoActividad" />
+                                </ng-template>
+                                <ng-template pTemplate="output">
+                                    {{productActivity.ponderaciongoActividad}}
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+
+                        <td>
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <input pInputText type="text"
+                                           [(ngModel)]="productActivity.observacionActividad" />
+                                </ng-template>
+                                <ng-template pTemplate="output">
+                                    {{productActivity.observacionActividad}}
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+
+                        <td>
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    {{productActivity.fecharegistroActividad}}
+                                </ng-template>
+                                <ng-template pTemplate="output">
+                                    {{productActivity.fecharegistroActividad}}
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+
+                        <td>
+                            <div class="flex">
+                                <button *ngIf="!editing" pButton pRipple icon="pi pi-pencil"
+                                        (click)="onRowEditInit(productActivity)" pInitEditableRow
+                                        class="p-button-rounded p-button-info mr-2">
+                                </button>
+                                <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"></button>
+                            </div>
+                        </td>
+
+                    </tr>
+
+                </ng-template>
+
+            </p-table>
+
+        </div>
+    </div>
+</div>
+
